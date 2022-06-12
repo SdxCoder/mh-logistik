@@ -29,15 +29,40 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  get: ^4.6.5
+
+  # Firebase
+  firebase_core: ^1.11.0
+  cloud_firestore: ^3.1.6
+  responsive_framework: ^0.1.4
+  google_mlkit_text_recognition: ^0.3.0
+  image_picker: ^0.8.5+3
+  permission_handler: ^9.2.0
+  image_cropper: ^2.0.3
+
+  # Generator dependencies
+  auto_route: ^4.0.1
+  injectable: ^1.5.0
+  get_it: ^7.2.0
+  json_annotation: ^4.3.0
+  freezed_annotation: ^2.0.3
 
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
+  flutter_vector_icons: ^1.0.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: ^0.9.2
+  injectable_generator: ^1.5.2
+  auto_route_generator: ^4.0.0
+  json_serializable: ^6.0.0
+  freezed: ^2.0.3+1
+  build_runner: ^2.1.4
+
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
@@ -49,6 +74,12 @@ dev_dependencies:
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/launcher_icon.png"
+  remove_alpha_ios: true
+
 # The following section is specific to Flutter packages.
 flutter:
 
@@ -58,9 +89,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+  assets:
+    - assets/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
