@@ -65,14 +65,14 @@ class RaisedButtonCustom extends StatelessWidget {
               MaterialStateProperty.resolveWith<EdgeInsetsGeometry>((states) {
             return padding ?? const EdgeInsets.symmetric(horizontal: 16);
           }),
-          // shape: MaterialStateProperty.resolveWith<OutlinedBorder>(
-          //   (states) {
-          //     return RoundedRectangleBorder(
-          //         borderRadius:
-          //             borderRadiusShape ?? BorderRadius.circular(borderRadius));
-          //   },
-          // ),
-        ),
+          shape: MaterialStateProperty.resolveWith<OutlinedBorder>(
+            (states) {
+              return RoundedRectangleBorder(
+                  borderRadius:
+                      borderRadiusShape ?? BorderRadius.circular(borderRadius));
+            },
+          ),
+       ),
         onPressed: isUpdate ? onUpdate : onPressed,
         child: isLoading == true
             ? const CircularProgressIndicator(

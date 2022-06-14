@@ -44,13 +44,13 @@ class HomeView extends StatelessWidget {
   Widget _buildPages(int index) {
     switch (index) {
       case 0:
-        return const RackLocationsView();
+        return RackLocationsView();
 
       default:
         return const SearchView();
     }
   }
-  
+
   Widget _card(
       {required BuildContext context,
       required String label,

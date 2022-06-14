@@ -28,8 +28,8 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
       () => _i6.RackLocationsViewController(get<_i5.RackLocationService>()));
   gh.factory<_i7.SearchViewController>(
       () => _i7.SearchViewController(get<_i4.PackageService>()));
-  gh.factory<_i8.AddPackageViewController>(
-      () => _i8.AddPackageViewController(get<_i4.PackageService>()));
+  gh.factory<_i8.AddPackageViewController>(() => _i8.AddPackageViewController(
+      get<_i4.PackageService>(), get<_i5.RackLocationService>()));
   gh.factory<_i9.HomeViewController>(
       () => _i9.HomeViewController(get<_i3.ImageManager>()));
   return get;

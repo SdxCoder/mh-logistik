@@ -5,11 +5,14 @@ import 'package:get/get_rx/get_rx.dart';
 import 'package:injectable/injectable.dart';
 import 'package:mh_logistik/core/data/package.dart';
 import 'package:mh_logistik/core/services/package_service.dart';
+import 'package:mh_logistik/core/shared_widgets/dialogs/delete_dialog.dart';
 import 'package:mh_logistik/core/utils/base_controller.dart';
+import 'package:mh_logistik/core/utils/snack_msg.dart';
+import 'package:mh_logistik/core/utils/utils.dart';
 
 @injectable
 class SearchViewController extends BaseController {
-  SearchViewController(this.packageService);
+  SearchViewController(this.packageService, );
 
   final PackageService packageService;
   final packageList = RxList<Package>([]);
@@ -17,6 +20,30 @@ class SearchViewController extends BaseController {
   final filterText = ''.obs;
 
   late StreamSubscription<List<Package>> _streamSubscription;
+
+  void _listenToPackageStream() {
+    _streamSubscription = packageService.stream().listen((data) {
+      packageList.value = data;
+      filteredList.value = packageList.value;
+    });
+  }
+
+
+
+  Future delete(String id) async {
+    final delete = await Utils.dialog(const DeleteDialog());
+
+    //
+    if (delete != null && delete) {
+      final result = await packageService.delete(id);
+
+      result.when(success: (d) {
+      //  SnackMsg.success('Deleted Successfuly.', pop: false);
+      }, error: (msg) {
+        SnackMsg.err(msg);
+      });
+    }
+  }
 
   /// Filter function
   bool filter(Package p, String val) {
@@ -31,13 +58,6 @@ class SearchViewController extends BaseController {
   //
   String _prepareString(String string) =>
       removeDiacritics(string).toLowerCase();
-
-  void _listenToPackageStream() {
-    _streamSubscription = packageService.stream().listen((data) {
-      packageList.value = data;
-      filteredList.value = packageList;
-    });
-  }
 
   @override
   void onInit() {

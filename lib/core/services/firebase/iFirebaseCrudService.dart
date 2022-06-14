@@ -36,14 +36,15 @@ class FirebaseCrudService<R> {
 
   /// Returns stream of data<R> for current user
   Stream<List<R>> stream() {
-    return db.streamQueryList();
+    return db.streamQueryList(
+        orderBy: [OrderBy('metaData.modifiedAt', descending: true)]);
   }
 
   /// Returns list of data<R> for current user
   Future<List<R>> getList() async {
     return await db.getQueryList(
-        source: Source.cache,
-     );
+      source: Source.cache,
+    );
   }
 
   /// Get data based on record id
@@ -53,8 +54,6 @@ class FirebaseCrudService<R> {
 
       return Result.success(result);
     } catch (e) {
-     
-
       return const Result.error("Something went wrong");
     }
   }
@@ -68,11 +67,8 @@ class FirebaseCrudService<R> {
           .updateData(id, data)
           .timeout(const Duration(seconds: 1), onTimeout: () {});
 
-     
-        return const Result.success(1);
-      
+      return const Result.success(1);
     } catch (e) {
-    
       return const Result.error("Something went wrong");
     }
   }
@@ -84,7 +80,6 @@ class FirebaseCrudService<R> {
       await db.removeItem(id);
       return const Result.success(1);
     } catch (e) {
-     
       return const Result.error("Something went wrong");
     }
   }

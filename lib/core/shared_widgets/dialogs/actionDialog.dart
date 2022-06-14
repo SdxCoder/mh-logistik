@@ -27,22 +27,20 @@ class ActionDialog extends StatelessWidget {
         ...children,
         Row(
           children: [
-           const Spacer(),
+            const Spacer(),
             TextButton(
                 onPressed: () {
                   appRouter.pop(false);
                 },
-                child: const Text('Cancel')),
+                child: Text(cancelButtonText ?? 'Cancel')),
             SizedBox(
               width: 70,
               child: ElevatedButton(
-                
                   onPressed: () {
                     appRouter.pop(true);
                   },
-                  child: const Text('Open')),
+                  child: Text(okButtonText ?? 'Yes')),
             ),
-           
           ],
         ),
       ],

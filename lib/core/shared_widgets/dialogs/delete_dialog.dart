@@ -1,21 +1,22 @@
+
+
+
 import 'package:flutter/material.dart';
 
 import 'actionDialog.dart';
 
-class StoragePermissionDeniedDialog extends StatelessWidget {
-  final String permission;
+class DeleteDialog extends StatelessWidget {
 
-  const StoragePermissionDeniedDialog({Key? key, required this.permission})
+  const DeleteDialog({Key? key, })
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ActionDialog(
-      okButtonText: 'Open',
-      
+      okButtonText: 'Yes',
       children: [
         Text(
-          "Grant Permission",
+          "Delete",
           textAlign: TextAlign.center,
           style: Theme.of(context)
               .textTheme
@@ -23,8 +24,8 @@ class StoragePermissionDeniedDialog extends StatelessWidget {
               ?.copyWith(fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 16.0),
-        Text(
-          "Permission denied, please go to Settings and grant permission to Access $permission",
+        const Text(
+          "Are you sure you want to delete this?",
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: 16),
