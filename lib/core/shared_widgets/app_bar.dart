@@ -30,10 +30,8 @@ class AppBarCustom extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: backgroundColor ?? AppTheme.backgroundColor,
       centerTitle: centerTitle,
       elevation: 0,
-      
       leadingWidth: leadingWidth,
       title: title == null
           ? const AppbarTitle()
@@ -70,13 +68,13 @@ class AppbarTitle extends StatelessWidget {
           text: "Mobile ",
           style: Theme.of(context)
               .textTheme
-              .headline4
+              .headline5
               ?.copyWith(color: AppTheme.textBlackColor)),
       TextSpan(
           text: "House",
           style: Theme.of(context)
               .textTheme
-              .headline4
+              .headline5
               ?.copyWith(color: AppTheme.primaryColor)),
     ]);
   }

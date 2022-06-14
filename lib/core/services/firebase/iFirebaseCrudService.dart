@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../../exceptions/exceptions.dart';
+
+import '../../models/result.dart';
 import '../../utils/logger.dart';
 import 'database_service.dart';
 
@@ -13,90 +14,78 @@ class FirebaseCrudService<R> {
   FirebaseCrudService(this.collection, {required this.fromDS, this.toMap})
       : db = DatabaseService<R>(collection, fromDS: fromDS, toMap: toMap);
 
-  // Save data
-  // If fails, throws exception
-  Future<bool> save(Map<String, dynamic> data, {String? id}) async {
+  // Save interval timer
+  // Returns 1 if record was added successfuly
+  Future<Result<int>> save(Map<String, dynamic> data, {String? id}) async {
     //
     try {
-      await db.create(data, id: id);
+      // Timeout is if the device is offline
+      await db
+          .create(data, id: id)
+          .timeout(const Duration(seconds: 1), onTimeout: () {});
 
-      return true;
+      return const Result.success(1);
     } on FirebaseException catch (e) {
-      logger.e(null, e);
-      logger.e(null, e.code);
-
-      if (e.code == "permission-denied") {
-        throw PermissionDeniedException;
-      }
-
-      rethrow;
+      logger.e(e.toString(), null);
+      return const Result.error("Something went wrong");
     } catch (e) {
-      logger.e(null, e);
-      rethrow;
+      logger.e(e.toString(), null);
+      return const Result.error("Something went wrong");
     }
   }
 
   /// Returns stream of data<R> for current user
-  Stream<List<R>> stream({List<QueryArgs> args = const [],}) {
-    return db.streamQueryList(
-      args: args
-    );
+  Stream<List<R>> stream() {
+    return db.streamQueryList();
   }
 
   /// Returns list of data<R> for current user
-  Future<List<R>> getList(
-      {List<QueryArgs> args = const [],
-      List<OrderBy>? orderBy,
-      int? limit,
-      Source? source}) async {
+  Future<List<R>> getList() async {
     return await db.getQueryList(
-        source: source ?? Source.serverAndCache,
-        args: [...args],
-        orderBy: orderBy,
-        limit: limit);
+        source: Source.cache,
+     );
   }
 
   /// Get data based on record id
-  Future<R> getSingle(String id, {Source? source}) async {
+  Future<Result<R>> getSingle(String id, {Source? source}) async {
     try {
       final result = await db.getSingle(id, source: source);
 
-      if (result == null) {
-        throw NoDataException();
-      }
-
-      return result;
+      return Result.success(result);
     } catch (e) {
-      logger.e(null, e);
+     
 
-      rethrow ;
+      return const Result.error("Something went wrong");
     }
   }
 
   /// Updates timer
   /// Returns true if record is updated
-  Future<bool> update(String id, Map<String, dynamic> data) async {
+  Future<Result<int>> update(String id, Map<String, dynamic> data) async {
     try {
       // Timeout is if the device is offline.
-      await db.updateData(id, data);
+      await db
+          .updateData(id, data)
+          .timeout(const Duration(seconds: 1), onTimeout: () {});
 
-      return true;
+     
+        return const Result.success(1);
+      
     } catch (e) {
-      logger.e(null, e);
-
-      rethrow ;
+    
+      return const Result.error("Something went wrong");
     }
   }
 
   /// Deletes timer
-  /// Returns true if successfuly deleted
-  Future<bool> delete(String id) async {
+  /// Returns 1 if successfuly deleted
+  Future<Result<int>> delete(String id) async {
     try {
       await db.removeItem(id);
-      return true;
+      return const Result.success(1);
     } catch (e) {
-      logger.e(null, e);
-      rethrow;
+     
+      return const Result.error("Something went wrong");
     }
   }
 }

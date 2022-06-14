@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
+import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
+import 'package:mh_logistik/core/data/rack_location.dart';
 import 'package:mh_logistik/core/shared_widgets/app_bar.dart';
-import 'package:mh_logistik/core/shared_widgets/button.dart';
 import 'package:mh_logistik/src/home/homeViewController.dart';
 import 'package:mh_logistik/src/injection.dart';
+import 'package:mh_logistik/src/package/add_package_view.dart';
+import 'package:mh_logistik/src/rack_locations/rack_locations_view.dart';
+import 'package:mh_logistik/src/search/search_view.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -14,27 +18,61 @@ class HomeView extends StatelessWidget {
     return GetBuilder<HomeViewController>(
       init: getIt<HomeViewController>(),
       builder: (controller) {
-        return Scaffold(
-          appBar: const AppBarCustom(),
-          body: Padding(
-            padding: const EdgeInsets.all(16),
-            child: Center(
-              child: Column(
-                children: [
-                  RaisedButtonCustom(
-                    btnText: "Scan",
-                    onPressed: () async {
-                      controller.getText();
-                    },
-                  ),
-                  Obx(() => Text(controller.text.value)),
-                ],
+        return Obx(
+          () => Scaffold(
+              bottomNavigationBar: BottomNavigationBar(
+                  currentIndex: controller.currentIndex.value,
+                  onTap: (index) {
+                    controller.currentIndex.value = index;
+                  },
+                  items: const [
+                    BottomNavigationBarItem(
+                        label: 'Locations', icon: Icon(AntDesign.edit)),
+                    BottomNavigationBarItem(
+                        label: 'Search', icon: Icon(AntDesign.search1)),
+                    BottomNavigationBarItem(
+                        label: 'Scan', icon: Icon(AntDesign.qrcode)),
+                  ]),
+              body: _buildPages(controller.currentIndex.value)),
+
+          //
+        );
+      },
+    );
+  }
+
+  Widget _buildPages(int index) {
+    switch (index) {
+      case 0:
+        return const RackLocationsView();
+
+      default:
+        return const SearchView();
+    }
+  }
+  
+  Widget _card(
+      {required BuildContext context,
+      required String label,
+      required void Function() onTap}) {
+    return Row(
+      children: [
+        Expanded(
+          child: Card(
+            child: GestureDetector(
+              onTap: onTap,
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Text(
+                  label,
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context).textTheme.bodyText2,
+                ),
               ),
             ),
           ),
-        );
-        ;
-      },
+        ),
+      ],
     );
   }
 }

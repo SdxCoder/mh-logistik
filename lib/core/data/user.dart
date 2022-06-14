@@ -50,6 +50,6 @@
 //         desiredWeightLastUpdated: DateTime(0),
 //       );
 
-//   factory UserProfile.fromJson(Map<String, dynamic> json) =>
-//       _$UserProfileFromJson(json);
+  // factory UserProfile.fromJson(Map<String, dynamic> json) =>
+  //     _$UserProfileFromJson(json);
 // }

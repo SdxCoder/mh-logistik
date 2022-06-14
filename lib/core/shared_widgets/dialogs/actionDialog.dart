@@ -19,7 +19,7 @@ class ActionDialog extends StatelessWidget {
       this.okButtonText,
       this.cancelButtonText})
       : super(key: key);
-      
+
   @override
   Widget build(BuildContext context) {
     return AppDialog(
@@ -27,24 +27,22 @@ class ActionDialog extends StatelessWidget {
         ...children,
         Row(
           children: [
-            Expanded(
-              child: RaisedButtonCustom(
-                btnColor: AppTheme.textGrayColor,
-                btnText: cancelButtonText ?? TranslateTextOf.lblBtnNo.tr,
+           const Spacer(),
+            TextButton(
                 onPressed: () {
                   appRouter.pop(false);
                 },
-              ),
+                child: const Text('Cancel')),
+            SizedBox(
+              width: 70,
+              child: ElevatedButton(
+                
+                  onPressed: () {
+                    appRouter.pop(true);
+                  },
+                  child: const Text('Open')),
             ),
-            SizedBox(width: Dimens.paddingLarge),
-            Expanded(
-              child: RaisedButtonCustom(
-                btnText: okButtonText ?? TranslateTextOf.lblBtnYes.tr,
-                onPressed: () {
-                  appRouter.pop(true);
-                },
-              ),
-            )
+           
           ],
         ),
       ],

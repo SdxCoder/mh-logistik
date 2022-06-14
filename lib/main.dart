@@ -11,8 +11,7 @@ import 'core/router/router.gr.dart';
 import 'core/utils/appTheme.dart';
 
 void main() async {
-
-   //
+  //
   WidgetsFlutterBinding.ensureInitialized();
 
   /// Firebase Initialisation
@@ -23,7 +22,6 @@ void main() async {
   //
   runApp(const MyApp());
 }
-
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -57,8 +55,9 @@ class MyApp extends StatelessWidget {
           background: Container(color: Colors.white),
           defaultScaleFactor: 1),
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(primarySwatch: Colors.red, useMaterial3: true),
+
       // theme: AppTheme.lightTheme(),
     );
   }
 }
-

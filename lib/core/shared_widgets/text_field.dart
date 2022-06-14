@@ -49,7 +49,7 @@ class TextFieldCustom extends StatelessWidget {
       validator: validator,
       cursorWidth: 1,
       maxLines: maxLines,
-      cursorColor: AppTheme.borderColor,
+    //  cursorColor: AppTheme.borderColor,
       autofocus: false,
       maxLength: maxLength,
       maxLengthEnforcement: enforceMaxLength,
@@ -66,28 +66,16 @@ class TextFieldCustom extends StatelessWidget {
         filled: true,
         fillColor: backgroundColor,
         errorMaxLines: 3,
-        hoverColor: Colors.white,
         errorText: errorText,
-        hintText: hintText,
+   
+        labelText: hintText,
         hintStyle: Theme.of(context).textTheme.bodyText2!.copyWith(
             fontWeight: FontWeight.w300, color: AppTheme.borderColor),
         contentPadding: EdgeInsets.symmetric(
             horizontal: 20, vertical: maxLines > 1 ? 8 : 2),
-        focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(borderRadius),
-            borderSide:
-                BorderSide(color: AppTheme.borderColor, width: 1)),
-        focusedErrorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(borderRadius),
-            borderSide:
-                BorderSide(color: Theme.of(context).errorColor, width: 1)),
-        errorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(borderRadius),
-            borderSide: BorderSide(width: 0.5)),
-        enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(borderRadius),
-            borderSide:
-                BorderSide(color: AppTheme.borderColor, width: 0.5)),
+         border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide: const BorderSide(width: 0.3)),
       ),
     );
   }

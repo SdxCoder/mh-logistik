@@ -35,10 +35,10 @@ class SnackMsg {
       Get.snackbar('', text,
           titleText: const Offstage(),
           duration: const Duration(seconds: _snackDurationSecs),
-          backgroundColor: AppTheme.backgroundColor,
+          backgroundColor: AppTheme.primaryColor,
           padding: const EdgeInsets.all(Dimens.paddingLarge),
           margin: const EdgeInsets.all(Dimens.paddingLarge),
-          colorText: AppTheme.textGrayColor,
+          colorText: Colors.white,
           snackPosition: SnackPosition.BOTTOM);
     }
 

@@ -2,11 +2,11 @@
     package="com.example.mh_logistik">
 
 
-      <!-- Permission for accessing `camera` -->
-   <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
 
    <application
         android:label="mh_logistik"
+        android:requestLegacyExternalStorage="true"
         android:name="${applicationName}"
         android:exported="true"
         android:icon="@mipmap/ic_launcher">

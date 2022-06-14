@@ -14,7 +14,7 @@ class AppDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      contentPadding: EdgeInsets.all(Dimens.paddingBig),
+      contentPadding: const EdgeInsets.all(Dimens.paddingBig),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       content: Column(
           mainAxisAlignment: MainAxisAlignment.center,

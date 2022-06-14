@@ -47,7 +47,7 @@ class RaisedButtonCustom extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: width ?? Dimens.width70,
+      width: width ?? Dimens.width50,
       height: height,
       child: ElevatedButton(
         style: ButtonStyle(
@@ -65,13 +65,13 @@ class RaisedButtonCustom extends StatelessWidget {
               MaterialStateProperty.resolveWith<EdgeInsetsGeometry>((states) {
             return padding ?? const EdgeInsets.symmetric(horizontal: 16);
           }),
-          shape: MaterialStateProperty.resolveWith<OutlinedBorder>(
-            (states) {
-              return RoundedRectangleBorder(
-                  borderRadius:
-                      borderRadiusShape ?? BorderRadius.circular(borderRadius));
-            },
-          ),
+          // shape: MaterialStateProperty.resolveWith<OutlinedBorder>(
+          //   (states) {
+          //     return RoundedRectangleBorder(
+          //         borderRadius:
+          //             borderRadiusShape ?? BorderRadius.circular(borderRadius));
+          //   },
+          // ),
         ),
         onPressed: isUpdate ? onUpdate : onPressed,
         child: isLoading == true

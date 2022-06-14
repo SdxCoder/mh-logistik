@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../router/router.dart';
 import 'actionDialog.dart';
 
 class StoragePermissionDeniedDialog extends StatelessWidget {
@@ -16,10 +17,10 @@ class StoragePermissionDeniedDialog extends StatelessWidget {
           textAlign: TextAlign.center,
           style: Theme.of(context)
               .textTheme
-              .headline5
+              .headline6
               ?.copyWith(fontWeight: FontWeight.bold),
         ),
-       const SizedBox(height: 16.0),
+        const SizedBox(height: 16.0),
         Text(
           "Permission denied, please go to Settings and grant permission to Access $permission",
           textAlign: TextAlign.center,

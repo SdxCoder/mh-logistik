@@ -10,6 +10,7 @@ import 'package:permission_handler/permission_handler.dart';
 
 import '../models/result.dart';
 import '../router/router.dart';
+import '../utils/appTheme.dart';
 import '../utils/logger.dart';
 
 @singleton
@@ -22,45 +23,45 @@ class ImageManager {
   /// Take picture from device gallery
   ///
   Future<Result<CroppedFile>> openGallery() async {
-    final result = await PermissonsManager.handlePermisson(Permission.storage);
+    // final result = await PermissonsManager.handlePermisson(Permission.storage);
 
-    if (result) {
-      // Check if the device is mobile
-      //
-      try {
-        if (Platform.isAndroid || Platform.isIOS) {
-          final pickedFile = await imagePicker.pickImage(
-              source: ImageSource.camera,
-              imageQuality: 80,
-              maxHeight: 500,
-              maxWidth: 500);
+    // if (result) {
+    // Check if the device is mobile
+    //
+    try {
+      if (Platform.isAndroid || Platform.isIOS) {
+        final pickedFile = await imagePicker.pickImage(
+            source: ImageSource.camera,
+            imageQuality: 80,
+            maxHeight: 2000,
+            maxWidth: 2000);
 
-          if (pickedFile != null) {
-            final file = await _cropImage(pickedFile.path);
-            return Result.success(file);
-          } else {
-            return const Result.error("");
-          }
+        if (pickedFile != null) {
+          final file = await _cropImage(pickedFile.path);
+          return Result.success(file);
         } else {
-          //
-          return const Result.error("Platform Error");
+          return const Result.error("");
         }
-      } on PlatformException catch (e) {
-        logger.d("Image picker error = ${e.code}");
-
-        return const Result.error("");
+      } else {
+        //
+        return const Result.error("Platform Error");
       }
-    } else {
+    } on PlatformException catch (e) {
+      logger.d("Image picker error = ${e.code}");
+
       return const Result.error("");
     }
+    // } else {
+    //   return const Result.error("");
+    // }
   }
 
   Future<CroppedFile?> _cropImage(String path) async {
     //
     final croppedFile = await ImageCropper().cropImage(
       sourcePath: path,
-      compressFormat: ImageCompressFormat.jpg,
-      compressQuality: 100,
+      compressFormat: ImageCompressFormat.png,
+      compressQuality: 80,
       uiSettings: buildUiSettings(),
     );
 
@@ -70,9 +71,12 @@ class ImageManager {
   List<PlatformUiSettings>? buildUiSettings() {
     return [
       AndroidUiSettings(
-          toolbarTitle: 'Cropper',
-          toolbarColor: Colors.deepOrange,
-          toolbarWidgetColor: Colors.white,
+          toolbarTitle: 'Crop',
+          toolbarWidgetColor: AppTheme.primaryColor,
+          backgroundColor: Colors.white,
+          activeControlsWidgetColor: AppTheme.primaryColor,
+          statusBarColor: Colors.grey,
+
           initAspectRatio: CropAspectRatioPreset.original,
           lockAspectRatio: false),
       IOSUiSettings(
