@@ -6,19 +6,25 @@ import 'package:mh_logistik/core/utils/appTheme.dart';
 class SlideableTile extends StatelessWidget {
   final Function(BuildContext)? onPressEdit;
   final Function(BuildContext)? onPressDelete;
+  final Function(BuildContext)? onPressDestore;
   final Widget child;
-  const SlideableTile({Key? key, this.onPressEdit, this.onPressDelete, required this.child})
+  const SlideableTile(
+      {Key? key,
+      this.onPressEdit,
+      this.onPressDelete,
+      required this.child,
+      this.onPressDestore})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Slidable(
       key: const ValueKey(0),
+
       endActionPane: ActionPane(
-        motion: const ScrollMotion(),
+        motion: const DrawerMotion(),
         children: [
           SlidableAction(
-           
             onPressed: onPressEdit,
             backgroundColor: Colors.transparent,
             foregroundColor: Colors.black,
@@ -31,6 +37,13 @@ class SlideableTile extends StatelessWidget {
             foregroundColor: Colors.red,
             icon: AntDesign.delete,
             label: 'Delete',
+          ),
+          SlidableAction(
+            onPressed: onPressDestore,
+            backgroundColor: Colors.transparent,
+            foregroundColor: Colors.blue,
+            icon: AntDesign.export,
+            label: 'Destore',
           ),
         ],
       ),

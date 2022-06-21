@@ -60,6 +60,9 @@ class SearchView extends StatelessWidget {
                                   package: package,
                                   scanResult: package.details));
                             },
+                            onPressDestore: (context){
+                              appRouter.push(const SignatureViewRoute());
+                            },
                             child: Card(
                                 elevation: 0,
                                 margin: const EdgeInsets.symmetric(vertical: 6),
