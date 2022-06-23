@@ -42,8 +42,10 @@ class NavRouter extends _i5.RootStackRouter {
               package: args.package));
     },
     SignatureViewRoute.name: (routeData) {
+      final args = routeData.argsAs<SignatureViewRouteArgs>();
       return _i5.AdaptivePage<dynamic>(
-          routeData: routeData, child: const _i4.SignatureView());
+          routeData: routeData,
+          child: _i4.SignatureView(key: args.key, package: args.package));
     }
   };
 
@@ -103,9 +105,24 @@ class AddPackageViewRouteArgs {
 
 /// generated route for
 /// [_i4.SignatureView]
-class SignatureViewRoute extends _i5.PageRouteInfo<void> {
-  const SignatureViewRoute()
-      : super(SignatureViewRoute.name, path: '/signature-view');
+class SignatureViewRoute extends _i5.PageRouteInfo<SignatureViewRouteArgs> {
+  SignatureViewRoute({_i6.Key? key, required _i7.Package package})
+      : super(SignatureViewRoute.name,
+            path: '/signature-view',
+            args: SignatureViewRouteArgs(key: key, package: package));
 
   static const String name = 'SignatureViewRoute';
+}
+
+class SignatureViewRouteArgs {
+  const SignatureViewRouteArgs({this.key, required this.package});
+
+  final _i6.Key? key;
+
+  final _i7.Package package;
+
+  @override
+  String toString() {
+    return 'SignatureViewRouteArgs{key: $key, package: $package}';
+  }
 }

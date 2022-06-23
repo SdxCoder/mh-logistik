@@ -23,6 +23,9 @@ mixin _$Package {
   String get id => throw _privateConstructorUsedError;
   String get details => throw _privateConstructorUsedError;
   RackLocation get rackLocation => throw _privateConstructorUsedError;
+  bool get destored => throw _privateConstructorUsedError;
+  @BlobConverter()
+  Uint8List? get image => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -33,7 +36,12 @@ mixin _$Package {
 abstract class $PackageCopyWith<$Res> {
   factory $PackageCopyWith(Package value, $Res Function(Package) then) =
       _$PackageCopyWithImpl<$Res>;
-  $Res call({String id, String details, RackLocation rackLocation});
+  $Res call(
+      {String id,
+      String details,
+      RackLocation rackLocation,
+      bool destored,
+      @BlobConverter() Uint8List? image});
 
   $RackLocationCopyWith<$Res> get rackLocation;
 }
@@ -51,6 +59,8 @@ class _$PackageCopyWithImpl<$Res> implements $PackageCopyWith<$Res> {
     Object? id = freezed,
     Object? details = freezed,
     Object? rackLocation = freezed,
+    Object? destored = freezed,
+    Object? image = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -65,6 +75,14 @@ class _$PackageCopyWithImpl<$Res> implements $PackageCopyWith<$Res> {
           ? _value.rackLocation
           : rackLocation // ignore: cast_nullable_to_non_nullable
               as RackLocation,
+      destored: destored == freezed
+          ? _value.destored
+          : destored // ignore: cast_nullable_to_non_nullable
+              as bool,
+      image: image == freezed
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as Uint8List?,
     ));
   }
 
@@ -82,7 +100,12 @@ abstract class _$$_PackageCopyWith<$Res> implements $PackageCopyWith<$Res> {
           _$_Package value, $Res Function(_$_Package) then) =
       __$$_PackageCopyWithImpl<$Res>;
   @override
-  $Res call({String id, String details, RackLocation rackLocation});
+  $Res call(
+      {String id,
+      String details,
+      RackLocation rackLocation,
+      bool destored,
+      @BlobConverter() Uint8List? image});
 
   @override
   $RackLocationCopyWith<$Res> get rackLocation;
@@ -102,6 +125,8 @@ class __$$_PackageCopyWithImpl<$Res> extends _$PackageCopyWithImpl<$Res>
     Object? id = freezed,
     Object? details = freezed,
     Object? rackLocation = freezed,
+    Object? destored = freezed,
+    Object? image = freezed,
   }) {
     return _then(_$_Package(
       id: id == freezed
@@ -116,6 +141,14 @@ class __$$_PackageCopyWithImpl<$Res> extends _$PackageCopyWithImpl<$Res>
           ? _value.rackLocation
           : rackLocation // ignore: cast_nullable_to_non_nullable
               as RackLocation,
+      destored: destored == freezed
+          ? _value.destored
+          : destored // ignore: cast_nullable_to_non_nullable
+              as bool,
+      image: image == freezed
+          ? _value.image
+          : image // ignore: cast_nullable_to_non_nullable
+              as Uint8List?,
     ));
   }
 }
@@ -125,7 +158,11 @@ class __$$_PackageCopyWithImpl<$Res> extends _$PackageCopyWithImpl<$Res>
 @JsonSerializable(explicitToJson: true)
 class _$_Package implements _Package {
   const _$_Package(
-      {required this.id, required this.details, required this.rackLocation});
+      {required this.id,
+      required this.details,
+      required this.rackLocation,
+      this.destored = false,
+      @BlobConverter() this.image});
 
   factory _$_Package.fromJson(Map<String, dynamic> json) =>
       _$$_PackageFromJson(json);
@@ -136,10 +173,16 @@ class _$_Package implements _Package {
   final String details;
   @override
   final RackLocation rackLocation;
+  @override
+  @JsonKey()
+  final bool destored;
+  @override
+  @BlobConverter()
+  final Uint8List? image;
 
   @override
   String toString() {
-    return 'Package(id: $id, details: $details, rackLocation: $rackLocation)';
+    return 'Package(id: $id, details: $details, rackLocation: $rackLocation, destored: $destored, image: $image)';
   }
 
   @override
@@ -150,7 +193,9 @@ class _$_Package implements _Package {
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.details, details) &&
             const DeepCollectionEquality()
-                .equals(other.rackLocation, rackLocation));
+                .equals(other.rackLocation, rackLocation) &&
+            const DeepCollectionEquality().equals(other.destored, destored) &&
+            const DeepCollectionEquality().equals(other.image, image));
   }
 
   @JsonKey(ignore: true)
@@ -159,7 +204,9 @@ class _$_Package implements _Package {
       runtimeType,
       const DeepCollectionEquality().hash(id),
       const DeepCollectionEquality().hash(details),
-      const DeepCollectionEquality().hash(rackLocation));
+      const DeepCollectionEquality().hash(rackLocation),
+      const DeepCollectionEquality().hash(destored),
+      const DeepCollectionEquality().hash(image));
 
   @JsonKey(ignore: true)
   @override
@@ -176,7 +223,9 @@ abstract class _Package implements Package {
   const factory _Package(
       {required final String id,
       required final String details,
-      required final RackLocation rackLocation}) = _$_Package;
+      required final RackLocation rackLocation,
+      final bool destored,
+      @BlobConverter() final Uint8List? image}) = _$_Package;
 
   factory _Package.fromJson(Map<String, dynamic> json) = _$_Package.fromJson;
 
@@ -186,6 +235,11 @@ abstract class _Package implements Package {
   String get details => throw _privateConstructorUsedError;
   @override
   RackLocation get rackLocation => throw _privateConstructorUsedError;
+  @override
+  bool get destored => throw _privateConstructorUsedError;
+  @override
+  @BlobConverter()
+  Uint8List? get image => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$$_PackageCopyWith<_$_Package> get copyWith =>

@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:mh_logistik/core/data/rack_location.dart';
 import 'package:mh_logistik/core/shared_widgets/app_bar.dart';
+import 'package:mh_logistik/src/destored_packages/destored_packages.dart';
 import 'package:mh_logistik/src/home/homeViewController.dart';
 import 'package:mh_logistik/src/injection.dart';
 import 'package:mh_logistik/src/package/add_package_view.dart';
@@ -25,11 +26,16 @@ class HomeView extends StatelessWidget {
                   onTap: (index) {
                     controller.currentIndex.value = index;
                   },
+                  selectedItemColor: Colors.red,
+                  unselectedItemColor: Colors.black54,
+                  showUnselectedLabels: true,
                   items: const [
                     BottomNavigationBarItem(
                         label: 'Locations', icon: Icon(AntDesign.edit)),
                     BottomNavigationBarItem(
                         label: 'Search', icon: Icon(AntDesign.search1)),
+                    BottomNavigationBarItem(
+                        label: 'Destored', icon: Icon(AntDesign.export)),
                     BottomNavigationBarItem(
                         label: 'Scan', icon: Icon(AntDesign.qrcode)),
                   ]),
@@ -45,34 +51,11 @@ class HomeView extends StatelessWidget {
     switch (index) {
       case 0:
         return RackLocationsView();
+      case 2:
+        return const DestoredPackagesView();
 
       default:
         return const SearchView();
     }
-  }
-
-  Widget _card(
-      {required BuildContext context,
-      required String label,
-      required void Function() onTap}) {
-    return Row(
-      children: [
-        Expanded(
-          child: Card(
-            child: GestureDetector(
-              onTap: onTap,
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Text(
-                  label,
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.bodyText2,
-                ),
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
   }
 }

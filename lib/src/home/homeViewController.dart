@@ -39,7 +39,7 @@ class HomeViewController extends BaseController {
     super.onInit();
 
     _indexWorker = ever(currentIndex, (int i) async {
-      if (i == 2) {
+      if (i == 3) {
         await getText();
       }
     });

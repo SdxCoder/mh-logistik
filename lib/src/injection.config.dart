@@ -10,7 +10,8 @@ import 'package:injectable/injectable.dart' as _i2;
 import '../core/manager/imageManager.dart' as _i3;
 import '../core/services/package_service.dart' as _i4;
 import '../core/services/rack_location_service.dart' as _i5;
-import 'home/homeViewController.dart' as _i9;
+import 'destored_packages/destored_package_view_controller.dart' as _i9;
+import 'home/homeViewController.dart' as _i10;
 import 'package/add_package_view_controller.dart' as _i8;
 import 'rack_locations/rack_locations_view_controller.dart' as _i6;
 import 'search/search_view_controller.dart'
@@ -30,7 +31,9 @@ _i1.GetIt $initGetIt(_i1.GetIt get,
       () => _i7.SearchViewController(get<_i4.PackageService>()));
   gh.factory<_i8.AddPackageViewController>(() => _i8.AddPackageViewController(
       get<_i4.PackageService>(), get<_i5.RackLocationService>()));
-  gh.factory<_i9.HomeViewController>(
-      () => _i9.HomeViewController(get<_i3.ImageManager>()));
+  gh.factory<_i9.DestoredPackageViewController>(
+      () => _i9.DestoredPackageViewController(get<_i4.PackageService>()));
+  gh.factory<_i10.HomeViewController>(
+      () => _i10.HomeViewController(get<_i3.ImageManager>()));
   return get;
 }
