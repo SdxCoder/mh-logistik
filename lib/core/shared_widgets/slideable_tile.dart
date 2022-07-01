@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
@@ -29,22 +30,24 @@ class SlideableTile extends StatelessWidget {
             backgroundColor: Colors.transparent,
             foregroundColor: Colors.black,
             icon: AntDesign.edit,
-            label: 'Edit',
+            label:  onPressDestore != null ? '' : 'Edit',
           ),
           SlidableAction(
             onPressed: onPressDelete,
             backgroundColor: Colors.transparent,
             foregroundColor: Colors.red,
             icon: AntDesign.delete,
-            label: 'Delete',
+            label: onPressDestore != null ? '' : 'Delete',
           ),
-          SlidableAction(
-            onPressed: onPressDestore,
-            backgroundColor: Colors.transparent,
-            foregroundColor: Colors.blue,
-            icon: AntDesign.export,
-            label: 'Destore',
-          ),
+          if (onPressDestore != null)
+            SlidableAction(
+              onPressed: onPressDestore,
+              backgroundColor: Colors.transparent,
+              foregroundColor: Colors.blue,
+              icon: AntDesign.export,
+              label: '',
+              spacing: 1,
+            ),
         ],
       ),
 
